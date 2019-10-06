@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
-  m_Name: "\u9053\u5177"
+  m_Name: "\u947D\u77F3"
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
   - {fileID: 21300000, guid: bd59bf2e866ed4529ae645637eb9c11d, type: 3}
@@ -21,4 +21,4 @@ MonoBehaviour:
   m_MinSpeed: 8
   m_MaxSpeed: 8
   m_AnimationStartTime: 0
-  m_TileColliderType: 0
+  m_TileColliderType: 1
