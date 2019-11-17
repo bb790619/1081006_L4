@@ -79,11 +79,11 @@ public class PlayerControl : MonoBehaviour
             speed = 0;
             StartCoroutine(GoodGame());
         }
-        if (PlayerHp > 0) TimeNow += Time.deltaTime;//遊戲時間
+        //if (PlayerHp > 0) TimeNow += Time.deltaTime;//遊戲時間
         //人物每秒扣血
         PlayerHp -= Time.deltaTime * 10;
         GameObject.Find("血條").GetComponent<Image>().fillAmount = PlayerHp / PlayerHpMax; //血條減少
-
+        
     }
 
     /// <summary>
@@ -93,8 +93,8 @@ public class PlayerControl : MonoBehaviour
     {
         SceneManager.LoadScene("遊戲");
     }
-    int Dimand = 0;
-    int Cherry = 0;
+    int Dimand = 0;//鑽石分數
+    int Cherry = 0;//櫻桃分數
     /// <summary>
     /// 人物死亡時，出現結束視窗
     /// </summary>
@@ -102,25 +102,26 @@ public class PlayerControl : MonoBehaviour
     {
         if (GGWindow.activeSelf == false)
         {
-            GGWindow.SetActive(true);
-            yield return new WaitForSeconds(0.5f);
-            while (DimandScore >0)
+            GGWindow.SetActive(true); 
+            yield return new WaitForSeconds(0.5f);//視窗出現後，延遲5秒再計算分數
+            while (DimandScore >0) //計算鑽石分數
             {
                 DimandScore--;
                 Dimand += 100;
                 GGWindow.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = Dimand.ToString();
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(0.2f);
             }
-            while (CherryScore > 0)
+            while (CherryScore > 0)//計算櫻桃分數
             {
                 CherryScore--;
                 Cherry += 50;
                 GGWindow.transform.GetChild(1).GetChild(0).GetComponent<Text>().text = Cherry.ToString();
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(0.2f);
             }
-            GGWindow.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = ((int)TimeNow+"秒").ToString();
+            TimeNow = ((int)Time.timeSinceLevelLoad)*10; //遊戲時間
+            GGWindow.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = (TimeNow).ToString();//計算遊戲時間的分數
             yield return new WaitForSeconds(0.5f);
-            GGWindow.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = (Dimand+ Cherry).ToString();
+            GGWindow.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = (Dimand+ Cherry+TimeNow).ToString();//總分
 
         }
     }
